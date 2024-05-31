@@ -52,17 +52,21 @@ left join countries on product_emissions.country_id = countries.id
 | 16 | 14         | 16         | 25                | 2017 | Multifunction Printers                                          | 110       | 1818                 | 25.08                      | 4.51                         | 70.41                        | Technology Hardware & Equipment | "Konica Minolta, Inc." | Japan        | 
 
 #Top 5 products with most emission
-select product_emissions.product_name as Product,sum(product_emissions.carbon_footprint_pcf) as emission from product_emissions 
+select 
+	product_emissions.product_name as Product,
+	industry_groups.industry_group as industry,
+	sum(product_emissions.carbon_footprint_pcf) as emission
+from product_emissions 
 left join industry_groups on product_emissions.industry_group_id = industry_groups.id
 left join companies on product_emissions.company_id = companies.id
 left join countries on product_emissions.country_id = countries.id
 group by product_emissions.product_name
 order by sum(product_emissions.carbon_footprint_pcf) desc
 limit 5
-| Product                      | emission | 
-| ---------------------------: | -------: | 
-| Wind Turbine G128 5 Megawats | 3718044  | 
-| Wind Turbine G132 5 Megawats | 3276187  | 
-| Wind Turbine G114 2 Megawats | 1532608  | 
-| Wind Turbine G90 2 Megawats  | 1251625  | 
-| TCDE                         | 198150   | 
+| Product                      | industry                           | emission | 
+| ---------------------------: | ---------------------------------: | -------: | 
+| Wind Turbine G128 5 Megawats | Electrical Equipment and Machinery | 3718044  | 
+| Wind Turbine G132 5 Megawats | Electrical Equipment and Machinery | 3276187  | 
+| Wind Turbine G114 2 Megawats | Electrical Equipment and Machinery | 1532608  | 
+| Wind Turbine G90 2 Megawats  | Electrical Equipment and Machinery | 1251625  | 
+| TCDE                         | Materials                          | 198150   | 
