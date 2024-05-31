@@ -1,4 +1,4 @@
-#Industry Groups
+# Industry Groups
 select*from industry_groups limit 5
 | id | industry_group                                                         | 
 | -: | ---------------------------------------------------------------------: | 
@@ -8,7 +8,7 @@ select*from industry_groups limit 5
 | 4  | "Mining - Iron, Aluminum, Other Metals"                                | 
 | 5  | "Pharmaceuticals, Biotechnology & Life Sciences"                       | 
 
-#Companies
+# Companies
 select*from companies limit 5
 | id | company_name                  | 
 | -: | ----------------------------: | 
@@ -18,7 +18,7 @@ select*from companies limit 5
 | 4  | "CNX Coal Resources, LP"      | 
 | 5  | "Coca-Cola Enterprises, Inc." | 
 
-#Countries
+# Countries
 select*from countries limit 5
 | id | country_name | 
 | -: | -----------: | 
@@ -28,7 +28,7 @@ select*from countries limit 5
 | 4  | Canada       | 
 | 5  | Chile        | 
 
-#Product Emissions
+# Product Emissions
 select*from product_emissions limit 5
 | id           | company_id | country_id | industry_group_id | year | product_name                                                    | weight_kg | carbon_footprint_pcf | upstream_percent_total_pcf | operations_percent_total_pcf | downstream_percent_total_pcf | 
 | -----------: | ---------: | ---------: | ----------------: | ---: | --------------------------------------------------------------: | --------: | -------------------: | -------------------------: | ---------------------------: | ---------------------------: | 
@@ -38,7 +38,7 @@ select*from product_emissions limit 5
 | 10261-1-2017 | 14         | 16         | 25                | 2017 | Multifunction Printers                                          | 110       | 1488                 | 30.65                      | 5.51                         | 63.84                        | 
 | 10261-2-2017 | 14         | 16         | 25                | 2017 | Multifunction Printers                                          | 110       | 1818                 | 25.08                      | 4.51                         | 70.41                        | 
 
-#Combining 3 tables
+# Combining 3 tables
 select*from product_emissions 
 left join industry_groups on product_emissions.industry_group_id = industry_groups.id
 left join companies on product_emissions.company_id = companies.id
@@ -51,7 +51,7 @@ left join countries on product_emissions.country_id = countries.id
 | 16 | 14         | 16         | 25                | 2017 | Multifunction Printers                                          | 110       | 1488                 | 30.65                      | 5.51                         | 63.84                        | Technology Hardware & Equipment | "Konica Minolta, Inc." | Japan        | 
 | 16 | 14         | 16         | 25                | 2017 | Multifunction Printers                                          | 110       | 1818                 | 25.08                      | 4.51                         | 70.41                        | Technology Hardware & Equipment | "Konica Minolta, Inc." | Japan        | 
 
-#Top 5 products with most emission
+# Top 5 products with most emission
 select 
 	product_emissions.product_name as Product,
 	industry_groups.industry_group as industry,
