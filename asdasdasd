@@ -1,0 +1,5 @@
+#combining tables
+select*from product_emissions 
+left join industry_groups on product_emissions.industry_group_id = industry_groups.id
+left join companies on product_emissions.company_id = companies.id
+left join countries on product_emissions.country_id = countries.id
