@@ -76,3 +76,23 @@ limit 5
 | Wind Turbine G114 2 Megawats | Electrical Equipment and Machinery | 1532608  | 
 | Wind Turbine G90 2 Megawats  | Electrical Equipment and Machinery | 1251625  | 
 | TCDE                         | Materials                          | 198150   | 
+
+# Top 5 industries with most emission
+select distinct
+	industry_groups.industry_group as industry,
+	sum(product_emissions.carbon_footprint_pcf) as emission
+from product_emissions 
+left join industry_groups on product_emissions.industry_group_id = industry_groups.id
+left join companies on product_emissions.company_id = companies.id
+left join countries on product_emissions.country_id = countries.id
+group by industry_groups.industry_group
+order by sum(product_emissions.carbon_footprint_pcf) desc
+limit 5
+
+| industry                           | emission | 
+| ---------------------------------: | -------: | 
+| Electrical Equipment and Machinery | 9801558  | 
+| Automobiles & Components           | 2582264  | 
+| Materials                          | 577595   | 
+| Technology Hardware & Equipment    | 363776   | 
+| Capital Goods                      | 258712   | 
